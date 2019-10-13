@@ -179,6 +179,34 @@ int main(int argc, char *argv[]) {
       else
         fprintf(out, "%07d%05d%05d%03d%05d%07d\n", F7_AND, rs2, rs1, F3_AND, rd, OP_LA);
     }
+
+
+    // 無条件分岐命令
+    else if (strncmp(opecode, "auipc", 5) == 0) {
+      int rd = reg(r0);
+      unsigned long long int imm = imm_31_12(r1);
+      if (verbose)
+        fprintf(out, "%020llu %05d %07d // %s", imm, rd, OP_AUIPC, line);
+      else 
+        fprintf(out, "%020llu%05d%07d\n", imm, rd, OP_AUIPC);
+    }
+    else if (strncmp(opecode, "jalr", 4) == 0) {
+      int rd = reg(r0);
+      int rs1 = reg(r1);
+      long long int imm = imm_11_0(r2);
+      if (verbose)
+        fprintf(out, "%012lld %05d %03d %05d %07d // %s", imm, rs1, F3_JALR, rd, OP_JALR, line);
+      else
+        fprintf(out, "%012lld%05d%03d%05d%07d\n", imm, rs1, F3_JALR, rd, OP_JALR);
+    }
+    else if (strncmp(opecode, "jal", 3) == 0) {
+      int rd = reg(r0);
+      unsigned long long int imm = imm_20_10_1_11_19_12(r1);
+      if (verbose)
+        fprintf(out, "%020llu %05d %07d // %s", imm, rd, OP_JAL, line);
+      else 
+        fprintf(out, "%020llu%05d%07d\n", imm, rd, OP_JAL);  
+    }
   }
 
   fprintf(out, "00000000000000000000000000000000");

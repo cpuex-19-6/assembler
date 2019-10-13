@@ -1,8 +1,11 @@
 #ifndef INSTRUCTION_INCLUDE
 #define INSTRUCTION_INCLUDE
 
-#define OP_LA	   110011 
-#define OP_LAI    10011
+#define OP_LA	    110011 
+#define OP_LAI     10011
+#define OP_AUIPC   10111
+#define OP_JAL   1101111
+#define OP_JALR  1100111
 
 #define F7_ADD  0000000
 #define F7_SUB   100000
@@ -32,8 +35,12 @@
 #define F3_ORI  110
 #define F3_ANDI 111
 
+#define F3_JALR 000
+
 #endif
 
 int reg(char* reg);
 int imm_4_0(char* imm);
 long long int imm_11_0(char* imm);
+unsigned long long int imm_31_12(char* imm);
+unsigned long long int imm_20_10_1_11_19_12(char* imm);
