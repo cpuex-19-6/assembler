@@ -2,8 +2,9 @@
 
 ## 使い方
 
-```
-./assembler [source] [target] (-v)
+```bash
+./assembler [src] [target] (-v)
+# 例えば ./assembler fib.s fib.bin
 ```
 
 アセンブラの形式は
