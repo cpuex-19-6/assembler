@@ -31,3 +31,19 @@ long long int imm_11_0(char* imm) {
 
   return binary;
 }
+
+// 即値 imm[4:0]
+int imm_4_0(char* imm) {
+  int n = atoi(imm) % 32;
+
+  int binary = 0;
+  int base = 1;
+  
+  while (n > 0) {
+    binary += (n % 2) * base;
+    n /= 2;
+    base *= 10;
+  }
+
+  return binary;
+}
