@@ -1,5 +1,19 @@
 # assembler
 
+## 対応済
+
+#### 基本算術論理命令
+
+addi, slli, xori, srli, srai, ori, andi, add, sub, sll, xor, srl, sra, or, and
+
+#### 無条件分岐命令
+
+auipc, jalr, jal
+
+#### メモリ操作命令
+
+lw, sw
+
 ## 使い方
 
 ```bash

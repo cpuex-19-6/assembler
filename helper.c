@@ -32,12 +32,12 @@ long long int imm_11_0(char* imm) {
   return binary;
 }
 
-// 即値 imm[4:0]
-int imm_4_0(char* imm) {
-  int n = atoi(imm) % 32;
+// 即値 imm[11:5]
+long long int imm_11_5(char* imm) {
+  int n = (atoi(imm) < 0) ? ((1 << 12) + atoi(imm)) : atoi(imm);
 
-  int binary = 0;
-  int base = 1;
+  long long int binary = 0;
+  long long int base = 1;
   
   while (n > 0) {
     binary += (n % 2) * base;
@@ -45,7 +45,24 @@ int imm_4_0(char* imm) {
     base *= 10;
   }
 
-  return binary;
+  return (binary / 100000);
+}
+
+
+// 即値 imm[4:0]
+int imm_4_0(char* imm) {
+  int n = (atoi(imm) < 0) ? ((1 << 12) + atoi(imm)) : atoi(imm);
+
+  long long int binary = 0;
+  long long int base = 1;
+  
+  while (n > 0) {
+    binary += (n % 2) * base;
+    n /= 2;
+    base *= 10;
+  }
+
+  return (binary % 100000);
 }
 
 // 即値 imm[31:12]

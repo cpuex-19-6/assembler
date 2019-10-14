@@ -40,7 +40,11 @@ int main(int argc, char *argv[]) {
     char r1[5];
     char r2[5];
 
-    sscanf(line, "%d%s%s%s%s", &pc, opecode, r0, r1, r2);
+    int res = sscanf(line, "%d%s%s%s%s", &pc, opecode, r0, r1, r2);
+    if ((res == 0) || (res == EOF)) {
+      printf("cannot assemble: %s", line);
+      continue;
+    }
 
     
     // 基本算術命令
@@ -181,6 +185,28 @@ int main(int argc, char *argv[]) {
     }
 
 
+    // メモリ操作命令
+    else if (strncmp(opecode, "lw", 2) == 0) {
+      int rd = reg(r0);
+      int rs1 = reg(r1);
+      long long int imm = imm_11_0(r2);
+      if (verbose)
+        fprintf(out, "%012lld %05d %03d %05d %07d // %s", imm, rs1, F3_LW, rd, OP_LD, line);
+      else
+        fprintf(out, "%012lld%05d%03d%05d%07d\n", imm, rs1, F3_LW, rd, OP_LD);
+    }
+    else if (strncmp(opecode, "sw", 2) == 0) {
+      int rs1 = reg(r0);
+      int rs2 = reg(r1);
+      long long int imm1 = imm_11_5(r2);
+      int imm2 = imm_4_0(r2);
+      if (verbose)
+        fprintf(out, "%07lld %05d %05d %03d %05d %07d // %s", imm1, rs2, rs1, F3_SW, imm2, OP_ST, line);
+      else
+        fprintf(out, "%07lld%05d%05d%03d%05d%07d\n", imm1, rs2, rs1, F3_SW, imm2, OP_ST);
+    }
+
+
     // 無条件分岐命令
     else if (strncmp(opecode, "auipc", 5) == 0) {
       int rd = reg(r0);
@@ -206,6 +232,11 @@ int main(int argc, char *argv[]) {
         fprintf(out, "%020llu %05d %07d // %s", imm, rd, OP_JAL, line);
       else 
         fprintf(out, "%020llu%05d%07d\n", imm, rd, OP_JAL);  
+    }
+
+
+    else {
+      printf("cannot assemble: %s", line);
     }
   }
 

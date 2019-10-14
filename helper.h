@@ -1,11 +1,13 @@
 #ifndef INSTRUCTION_INCLUDE
 #define INSTRUCTION_INCLUDE
 
-#define OP_LA	    110011 
+#define OP_LA     110011 
 #define OP_LAI     10011
 #define OP_AUIPC   10111
 #define OP_JAL   1101111
 #define OP_JALR  1100111
+#define OP_LD         11
+#define OP_ST     100011
 
 #define F7_ADD  0000000
 #define F7_SUB   100000
@@ -21,26 +23,30 @@
 
 #define F3_ADD  000
 #define F3_SUB  000
-#define F3_SLL  001
+#define F3_SLL    1
 #define F3_XOR  100
 #define F3_SRL  101
 #define F3_SRA  101
 #define F3_OR   110
 #define F3_AND  111
 #define F3_ADDI 000
-#define F3_SLLI 001
+#define F3_SLLI   1
 #define F3_XORI 100
 #define F3_SRLI 101
 #define F3_SRAI 101
 #define F3_ORI  110
 #define F3_ANDI 111
 
+#define F3_LW    10
+#define F3_SW    10
+
 #define F3_JALR 000
 
 #endif
 
 int reg(char* reg);
-int imm_4_0(char* imm);
 long long int imm_11_0(char* imm);
+long long int imm_11_5(char* imm);
+int imm_4_0(char* imm);
 unsigned long long int imm_31_12(char* imm);
 unsigned long long int imm_20_10_1_11_19_12(char* imm);
