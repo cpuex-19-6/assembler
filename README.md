@@ -10,6 +10,10 @@ addi, slli, xori, srli, srai, ori, andi, add, sub, sll, xor, srl, sra, or, and
 
 auipc, jalr, jal
 
+#### 条件分岐命令
+
+bltu, bgeu, beq, bne, blt, bge
+
 #### メモリ操作命令
 
 lw, sw
@@ -58,3 +62,5 @@ lw, sw
 ```
 
 このように多少読みやすい形式で出力します。
+
+実行時に引数のオプションで `-b` を付けると bin.coe の形式で出力します。

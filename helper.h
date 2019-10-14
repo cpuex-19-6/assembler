@@ -8,6 +8,7 @@
 #define OP_JALR  1100111
 #define OP_LD         11
 #define OP_ST     100011
+#define OP_CB    1100011
 
 #define F7_ADD  0000000
 #define F7_SUB   100000
@@ -42,11 +43,20 @@
 
 #define F3_JALR 000
 
+#define F3_BEQ  000
+#define F3_BNE    1
+#define F3_BLT  100
+#define F3_BGE  101
+#define F3_BLTU 110
+#define F3_BGEU 111
+
 #endif
 
-int reg(char* reg);
-long long int imm_11_0(char* imm);
-long long int imm_11_5(char* imm);
-int imm_4_0(char* imm);
-unsigned long long int imm_31_12(char* imm);
-unsigned long long int imm_20_10_1_11_19_12(char* imm);
+int reg(char*);
+long long int imm_11_0(char*);
+long long int imm_11_5(char*);
+int imm_4_0(char*);
+long long int imm_12_10_5(char*);
+int imm_4_1_11(char*);
+unsigned long long int imm_31_12(char*);
+unsigned long long int imm_20_10_1_11_19_12(char*);

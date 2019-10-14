@@ -48,7 +48,6 @@ long long int imm_11_5(char* imm) {
   return (binary / 100000);
 }
 
-
 // 即値 imm[4:0]
 int imm_4_0(char* imm) {
   int n = (atoi(imm) < 0) ? ((1 << 12) + atoi(imm)) : atoi(imm);
@@ -63,6 +62,38 @@ int imm_4_0(char* imm) {
   }
 
   return (binary % 100000);
+}
+
+// 即値 imm[12|10:5]
+long long int imm_12_10_5(char* imm) {
+  int n = (atoi(imm) < 0) ? ((1 << 12) + atoi(imm)) : atoi(imm);
+
+  long long int binary = 0;
+  
+  binary += ((n >> 11) % 2) * 1000 * 1000;
+  binary += ((n >> 9) % 2) * 1000 * 100;
+  binary += ((n >> 8) % 2) * 1000 * 10;
+  binary += ((n >> 7) % 2) * 1000;
+  binary += ((n >> 6) % 2) * 100;
+  binary += ((n >> 5) % 2) * 10;
+  binary += ((n >> 4) % 2);
+
+  return binary;
+}
+
+// 即値 imm[4:1|11]
+int imm_4_1_11(char* imm) {
+  int n = (atoi(imm) < 0) ? ((1 << 12) + atoi(imm)) : atoi(imm);
+
+  long long int binary = 0;
+
+  binary += ((n >> 3) % 2) * 10000;
+  binary += ((n >> 2) % 2) * 1000;
+  binary += ((n >> 1) % 2) * 100;
+  binary += (n % 2) * 10;
+  binary += ((n >> 10) % 2);
+  
+  return binary;
 }
 
 // 即値 imm[31:12]

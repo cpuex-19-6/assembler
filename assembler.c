@@ -7,6 +7,7 @@
 int main(int argc, char *argv[]) {
   FILE *in, *out;
   int verbose = 0;
+  int bincoeMode = 0;
 
   if (argc < 3) {
     perror("Usage: ./assembler [source] [target] (-v)\n");
@@ -23,6 +24,14 @@ int main(int argc, char *argv[]) {
   }
   if ((argc >= 4) && strncmp(argv[3], "-v", 2) == 0) {
     verbose = 1;
+  }
+  if ((argc >= 4) && strncmp(argv[3], "-b", 2) == 0) {
+    bincoeMode = 1;
+  }
+
+  if (bincoeMode) {
+    fprintf(out, "memory_initialization_radix=2;\n");
+    fprintf(out, "memory_initialization_vector=\n");
   }
 
 
@@ -235,12 +244,79 @@ int main(int argc, char *argv[]) {
     }
 
 
+    // 条件分岐命令
+    else if (strncmp(opecode, "bltu", 4) == 0) {
+      int rs1 = reg(r0);
+      int rs2 = reg(r1);
+      long long int imm1 = imm_12_10_5(r2);
+      int imm2 = imm_4_1_11(r2);
+      if (verbose)
+        fprintf(out, "%07lld %05d %05d %03d %05d %07d // %s", imm1, rs2, rs1, F3_BLTU, imm2, OP_CB, line);
+      else 
+        fprintf(out, "%07lld%05d%05d%03d%05d%07d\n", imm1, rs2, rs1, F3_BLTU, imm2, OP_CB);
+    }
+    else if (strncmp(opecode, "bgeu", 4) == 0) {
+      int rs1 = reg(r0);
+      int rs2 = reg(r1);
+      long long int imm1 = imm_12_10_5(r2);
+      int imm2 = imm_4_1_11(r2);
+      if (verbose)
+        fprintf(out, "%07lld %05d %05d %03d %05d %07d // %s", imm1, rs2, rs1, F3_BGEU, imm2, OP_CB, line);
+      else 
+        fprintf(out, "%07lld%05d%05d%03d%05d%07d\n", imm1, rs2, rs1, F3_BGEU, imm2, OP_CB);
+    }
+    else if (strncmp(opecode, "beq", 3) == 0) {
+      int rs1 = reg(r0);
+      int rs2 = reg(r1);
+      long long int imm1 = imm_12_10_5(r2);
+      int imm2 = imm_4_1_11(r2);
+      if (verbose)
+        fprintf(out, "%07lld %05d %05d %03d %05d %07d // %s", imm1, rs2, rs1, F3_BEQ, imm2, OP_CB, line);
+      else 
+        fprintf(out, "%07lld%05d%05d%03d%05d%07d\n", imm1, rs2, rs1, F3_BEQ, imm2, OP_CB);
+    }
+    else if (strncmp(opecode, "bne", 3) == 0) {
+      int rs1 = reg(r0);
+      int rs2 = reg(r1);
+      long long int imm1 = imm_12_10_5(r2);
+      int imm2 = imm_4_1_11(r2);
+      if (verbose)
+        fprintf(out, "%07lld %05d %05d %03d %05d %07d // %s", imm1, rs2, rs1, F3_BNE, imm2, OP_CB, line);
+      else 
+        fprintf(out, "%07lld%05d%05d%03d%05d%07d\n", imm1, rs2, rs1, F3_BNE, imm2, OP_CB);
+    }
+    else if (strncmp(opecode, "blt", 3) == 0) {
+      int rs1 = reg(r0);
+      int rs2 = reg(r1);
+      long long int imm1 = imm_12_10_5(r2);
+      int imm2 = imm_4_1_11(r2);
+      if (verbose)
+        fprintf(out, "%07lld %05d %05d %03d %05d %07d // %s", imm1, rs2, rs1, F3_BLT, imm2, OP_CB, line);
+      else 
+        fprintf(out, "%07lld%05d%05d%03d%05d%07d\n", imm1, rs2, rs1, F3_BLT, imm2, OP_CB);
+    }
+    else if (strncmp(opecode, "bge", 3) == 0) {
+      int rs1 = reg(r0);
+      int rs2 = reg(r1);
+      long long int imm1 = imm_12_10_5(r2);
+      int imm2 = imm_4_1_11(r2);
+      if (verbose)
+        fprintf(out, "%07lld %05d %05d %03d %05d %07d // %s", imm1, rs2, rs1, F3_BGE, imm2, OP_CB, line);
+      else 
+        fprintf(out, "%07lld%05d%05d%03d%05d%07d\n", imm1, rs2, rs1, F3_BGE, imm2, OP_CB);
+    }
+    
+
+
     else {
       printf("cannot assemble: %s", line);
     }
   }
 
   fprintf(out, "00000000000000000000000000000000");
+  if (bincoeMode) {
+    fprintf(out, ";");
+  }
 
   fclose(in);
   fclose(out);
