@@ -1,6 +1,7 @@
 #ifndef INSTRUCTION_INCLUDE
 #define INSTRUCTION_INCLUDE
 
+#define OP_LUI    110111
 #define OP_LA     110011 
 #define OP_LAI     10011
 #define OP_AUIPC   10111

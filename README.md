@@ -2,6 +2,10 @@
 
 ## 対応済
 
+#### 即値補助命令
+
+lui
+
 #### 基本算術論理命令
 
 addi, slli, xori, srli, srai, ori, andi, add, sub, sll, xor, srl, sra, or, and

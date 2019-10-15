@@ -55,9 +55,20 @@ int main(int argc, char *argv[]) {
       continue;
     }
 
+
+    // 即値補助命令
+    if (strncmp(opecode, "lui", 3) == 0) {
+      int rd = reg(r0);
+      unsigned long long int imm = imm_31_12(r1);
+      if (verbose)
+        fprintf(out, "%020llu %05d %07d // %s", imm, rd, OP_LUI, line);
+      else 
+        fprintf(out, "%020llu%05d%07d\n", imm, rd, OP_LUI);
+    }
+
     
     // 基本算術命令
-    if (strncmp(opecode, "addi", 4) == 0) {
+    else if (strncmp(opecode, "addi", 4) == 0) {
       int rd = reg(r0);
       int rs1 = reg(r1);
       long long int imm = imm_11_0(r2);
