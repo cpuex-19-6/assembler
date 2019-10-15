@@ -66,7 +66,8 @@ int imm_4_0(char* imm) {
 
 // 即値 imm[12|10:5]
 long long int imm_12_10_5(char* imm) {
-  int n = (atoi(imm) < 0) ? ((1 << 12) + atoi(imm)) : atoi(imm);
+  int m = atoi(imm) / 2;
+  int n = (m < 0) ? ((1 << 12) + m) : m;
 
   long long int binary = 0;
   
@@ -83,7 +84,8 @@ long long int imm_12_10_5(char* imm) {
 
 // 即値 imm[4:1|11]
 int imm_4_1_11(char* imm) {
-  int n = (atoi(imm) < 0) ? ((1 << 12) + atoi(imm)) : atoi(imm);
+  int m = atoi(imm) / 2;
+  int n = (m < 0) ? ((1 << 12) + m) : m;
 
   long long int binary = 0;
 
@@ -99,7 +101,8 @@ int imm_4_1_11(char* imm) {
 // 即値 imm[31:12]
 // 20桁の整数ですが, unsigned long long でギリギリおさまります（）
 unsigned long long int imm_31_12(char* imm) {
-  unsigned long int n = (atol(imm) < 0) ? ((1 << 20) + atol(imm)) : atol(imm);
+  int m = atoi(imm) / 4096;
+  unsigned long int n = (m < 0) ? ((1 << 20) + m) : m;
 
   unsigned long long int binary = 0;
   unsigned long long int base = 1;
@@ -115,7 +118,8 @@ unsigned long long int imm_31_12(char* imm) {
 
 // 即値 imm[20|10:1|11|19:12]
 unsigned long long int imm_20_10_1_11_19_12(char* imm) {
-  unsigned long int n = (atol(imm) < 0) ? ((1 << 20) + atol(imm)) : atol(imm);
+  int m = atol(imm) / 2;
+  unsigned long int n = (m < 0) ? ((1 << 20) + m) : m;
 
   unsigned long long int binary = 0;
 
