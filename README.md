@@ -33,8 +33,8 @@ fadd, fsub, fmul, fdiv, fsgnjn, fsgnjx, fsgnj, feq, flt, fle, fsqrt, itof, ftoi,
 ## 使い方
 
 ```bash
-./assembler [src] [target] (-v)
-# 例えば ./assembler fib.s fib.bin
+./asm [src] [target] (-v)
+# 例えば ./asm fib.s fib.bin
 ```
 
 アセンブラの形式は

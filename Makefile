@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -Wall -MMD -MP
 LDFLAGS = -lm
-TARGET = assembler
+TARGET = asm
 SRCS = $(wildcard *.c)
 OBJS = $(SRCS:%.c=%.o)
 DEPS = $(SRCS:%.c=%.d)
