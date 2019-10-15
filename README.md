@@ -22,6 +22,14 @@ bltu, bgeu, beq, bne, blt, bge
 
 lw, sw
 
+#### 浮動小数点数メモリ操作命令
+
+flw, fsw
+
+#### 浮動小数点数算術命令
+
+fadd, fsub, fmul, fdiv, fsgnjn, fsgnjx, fsgnj, feq, flt, fle, fsqrt, itof, ftoi, fmvi, imvf
+
 ## 使い方
 
 ```bash

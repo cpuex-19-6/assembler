@@ -11,6 +11,10 @@
 #define OP_ST     100011
 #define OP_CB    1100011
 
+#define OP_FLW       111
+#define OP_FSW    100111
+#define OP_FLA   1010011
+
 #define F7_ADD  0000000
 #define F7_SUB   100000
 #define F7_SLL  0000000
@@ -22,6 +26,22 @@
 #define F7_SLLI 0000000
 #define F7_SRLI 0000000
 #define F7_SRAI  100000
+
+#define F7_FADD   0000000
+#define F7_FSUB       100
+#define F7_FMUL      1000
+#define F7_FDIV      1100
+#define F7_FSGNJ    10000
+#define F7_FSGNJN   10000
+#define F7_FSGNJX   10000
+#define F7_FEQ    1010000
+#define F7_FLT    1010000
+#define F7_FLE    1010000
+#define F7_FSQRT   101100
+#define F7_ITOF   1100000
+#define F7_FTOI   1101000
+#define F7_FMVI   1110000
+#define F7_IMVF   1111000
 
 #define F3_ADD  000
 #define F3_SUB  000
@@ -42,6 +62,9 @@
 #define F3_LW    10
 #define F3_SW    10
 
+#define F3_FLW   10
+#define F3_FSW   10
+
 #define F3_JALR 000
 
 #define F3_BEQ  000
@@ -50,6 +73,28 @@
 #define F3_BGE  101
 #define F3_BLTU 110
 #define F3_BGEU 111
+
+#define F3_FADD   000
+#define F3_FSUB   000
+#define F3_FMUL   000
+#define F3_FDIV   000
+#define F3_FSGNJ  000
+#define F3_FSGNJN   1
+#define F3_FSGNJX  10
+#define F3_FEQ     10
+#define F3_FLT      1
+#define F3_FLE    000
+#define F3_FSQRT  000
+#define F3_ITOF   000
+#define F3_FTOI   000
+#define F3_FMVI   000
+#define F3_IMVF   000
+
+#define RS2_FSQRT 00000
+#define RS2_ITOF  00000
+#define RS2_IMVF  00000
+#define RS2_FTOI  00000
+#define RS2_FMVI  00000
 
 #endif
 
