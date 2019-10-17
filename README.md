@@ -37,7 +37,7 @@ fadd, fsub, fmul, fdiv, fsgnjn, fsgnjx, fsgnj, feq, flt, fle, fsqrt, itof, ftoi,
 # 例えば ./asm fib.s fib.bin
 ```
 
-アセンブラの形式は
+アセンブリの形式は
 
 ```
 # jump to main entry point
@@ -60,7 +60,7 @@ fadd, fsub, fmul, fdiv, fsgnjn, fsgnjx, fsgnj, feq, flt, fle, fsqrt, itof, ftoi,
 例えば上記のような、
 
 - 行頭にプログラムカウンタの数値がある（アセンブラではこれは単に無視する）
-- `rd`, `rs1`, `rs2` が空白区切り
+- ~~`rd`, `rs1`, `rs2` が空白区切り~~ **元のアセンブリがカンマ区切りでも大丈夫です！**
 - レジスタには `x` が先頭に付いていて即値には付いていない
 - load 命令や store 命令でも、例えば `sw	x31 4(x2)` ではなく `sw	x2 x31 4` と表記されている
 

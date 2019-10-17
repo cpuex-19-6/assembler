@@ -45,11 +45,13 @@ int main(int argc, char *argv[]) {
 
     int pc;
     char opecode[10];
-    char r0[5];
-    char r1[5];
-    char r2[5];
+    char r0[10];
+    char r1[10];
+    char r2[10];
 
-    int res = sscanf(line, "%d%s%s%s%s", &pc, opecode, r0, r1, r2);
+    char* inst = eliminate_comma(line);
+
+    int res = sscanf(inst, "%d%s%s%s%s", &pc, opecode, r0, r1, r2);
     if ((res == 0) || (res == EOF)) {
       printf("cannot assemble: %s", line);
       continue;
