@@ -15,6 +15,9 @@
 #define OP_FSW    100111
 #define OP_FLA   1010011
 
+#define OP_IN       1011
+#define OP_OUT    101011
+
 #define F7_ADD  0000000
 #define F7_SUB   100000
 #define F7_SLL  0000000
@@ -42,6 +45,11 @@
 #define F7_FTOI   1101000
 #define F7_FMVI   1110000
 #define F7_IMVF   1111000
+
+#define F7_INW    0000000
+#define F7_INF     100000
+#define F7_OUTW   0000000
+#define F7_OUTB   0000000
 
 #define F3_ADD  000
 #define F3_SUB  000
@@ -90,11 +98,21 @@
 #define F3_FMVI   000
 #define F3_IMVF   000
 
+#define F3_INW     10
+#define F3_INF     10
+#define F3_OUTW   000
+#define F3_OUTB    10
+
 #define RS2_FSQRT 00000
 #define RS2_ITOF  00000
 #define RS2_IMVF  00000
 #define RS2_FTOI  00000
 #define RS2_FMVI  00000
+
+#define RS2_IN    00000
+#define RS2_OUT   00000
+#define RS1_IN    00000
+#define RD_OUT    00000
 
 #endif
 

@@ -475,6 +475,38 @@ int main(int argc, char *argv[]) {
     }
 
 
+    // 入出力命令
+    else if (strncmp(opecode, "inw", 3) == 0) {
+      int rd = reg(r0);
+      if (verbose)
+        fprintf(out, "%07d %05d %05d %03d %05d %07d // %s", F7_INW, RS2_IN, RS1_IN, F3_INW, rd, OP_IN, line);
+      else 
+        fprintf(out, "%07d%05d%05d%03d%05d%07d\n", F7_INW, RS2_IN, RS1_IN, F3_INW, rd, OP_IN);
+    }
+    else if (strncmp(opecode, "inf", 3) == 0) {
+      int rd = reg(r0);
+      if (verbose)
+        fprintf(out, "%07d %05d %05d %03d %05d %07d // %s", F7_INF, RS2_IN, RS1_IN, F3_INF, rd, OP_IN, line);
+      else 
+        fprintf(out, "%07d%05d%05d%03d%05d%07d\n", F7_INF, RS2_IN, RS1_IN, F3_INF, rd, OP_IN);
+    }
+    else if (strncmp(opecode, "outw", 4) == 0) {
+      int rs1 = reg(r0);
+      if (verbose)
+        fprintf(out, "%07d %05d %05d %03d %05d %07d // %s", F7_OUTW, RS2_OUT, rs1, F3_OUTW, RD_OUT, OP_OUT, line);
+      else 
+        fprintf(out, "%07d%05d%05d%03d%05d%07d\n", F7_OUTW, RS2_OUT, rs1, F3_OUTW, RD_OUT, OP_OUT);
+    }
+    else if (strncmp(opecode, "outb", 4) == 0) {
+      int rs1 = reg(r0);
+      if (verbose)
+        fprintf(out, "%07d %05d %05d %03d %05d %07d // %s", F7_OUTB, RS2_OUT, rs1, F3_OUTB, RD_OUT, OP_OUT, line);
+      else 
+        fprintf(out, "%07d%05d%05d%03d%05d%07d\n", F7_OUTB, RS2_OUT, rs1, F3_OUTB, RD_OUT, OP_OUT);
+    }
+
+
+
     else {
       printf("cannot assemble: %s", line);
     }

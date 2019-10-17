@@ -30,6 +30,10 @@ flw, fsw
 
 fadd, fsub, fmul, fdiv, fsgnjn, fsgnjx, fsgnj, feq, flt, fle, fsqrt, itof, ftoi, fmvi, imvf
 
+#### 入出力命令
+
+inw, inf, outw, outb
+
 ## 使い方
 
 ```bash
