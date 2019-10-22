@@ -20,6 +20,10 @@
 
 #define F7_ADD  0000000
 #define F7_SUB   100000
+#define F7_DIV        1
+#define F7_DIVU       1
+#define F7_REM        1
+#define F7_REMU       1
 #define F7_SLL  0000000
 #define F7_XOR  0000000
 #define F7_SRL  0000000
@@ -41,6 +45,7 @@
 #define F7_FLT    1010000
 #define F7_FLE    1010000
 #define F7_FSQRT   101100
+#define F7_FFLOOR  100000
 #define F7_ITOF   1100000
 #define F7_FTOI   1101000
 #define F7_FMVI   1110000
@@ -53,6 +58,10 @@
 
 #define F3_ADD  000
 #define F3_SUB  000
+#define F3_DIV  100
+#define F3_DIVU 101
+#define F3_REM  110
+#define F3_REMU 111
 #define F3_SLL    1
 #define F3_XOR  100
 #define F3_SRL  101
@@ -93,6 +102,7 @@
 #define F3_FLT      1
 #define F3_FLE    000
 #define F3_FSQRT  000
+#define F3_FFLOOR  10
 #define F3_ITOF   000
 #define F3_FTOI   000
 #define F3_FMVI   000
@@ -103,11 +113,12 @@
 #define F3_OUTW   000
 #define F3_OUTB    10
 
-#define RS2_FSQRT 00000
-#define RS2_ITOF  00000
-#define RS2_IMVF  00000
-#define RS2_FTOI  00000
-#define RS2_FMVI  00000
+#define RS2_FSQRT  00000
+#define RS2_FFLOOR 00000
+#define RS2_ITOF   00000
+#define RS2_IMVF   00000
+#define RS2_FTOI   00000
+#define RS2_FMVI   00000
 
 #define RS2_IN    00000
 #define RS2_OUT   00000

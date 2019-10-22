@@ -8,7 +8,7 @@ lui
 
 #### 基本算術論理命令
 
-addi, slli, xori, srli, srai, ori, andi, add, sub, sll, xor, srl, sra, or, and
+addi, slli, xori, srli, srai, ori, andi, add, sub, divu, div, remu, rem, sll, xor, srl, sra, or, and
 
 #### 無条件分岐命令
 
@@ -28,7 +28,11 @@ flw, fsw
 
 #### 浮動小数点数算術命令
 
-fadd, fsub, fmul, fdiv, fsgnjn, fsgnjx, fsgnj, feq, flt, fle, fsqrt, itof, ftoi, fmvi, imvf
+fadd, fsub, fmul, fdiv, fsgnjn, fsgnjx, fsgnj, fsqrt, ffloor
+
+#### 浮動小数点数・整数間命令
+
+itof, ftoi, fmvi, imvf, feq, flt, fle
 
 #### 入出力命令
 

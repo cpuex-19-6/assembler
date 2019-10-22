@@ -151,6 +151,42 @@ int main(int argc, char *argv[]) {
       else
         fprintf(out, "%07d%05d%05d%03d%05d%07d\n", F7_SUB, rs2, rs1, F3_SUB, rd, OP_LA);
     }
+    else if (strncmp(opecode, "divu", 4) == 0) {
+      int rd = reg(r0);
+      int rs1 = reg(r1);
+      int rs2 = reg(r2);
+      if (verbose)
+        fprintf(out, "%07d %05d %05d %03d %05d %07d // %s", F7_DIVU, rs2, rs1, F3_DIVU, rd, OP_LA, line);
+      else
+        fprintf(out, "%07d%05d%05d%03d%05d%07d\n", F7_DIVU, rs2, rs1, F3_DIVU, rd, OP_LA);
+    }
+    else if (strncmp(opecode, "div", 3) == 0) {
+      int rd = reg(r0);
+      int rs1 = reg(r1);
+      int rs2 = reg(r2);
+      if (verbose)
+        fprintf(out, "%07d %05d %05d %03d %05d %07d // %s", F7_DIV, rs2, rs1, F3_DIV, rd, OP_LA, line);
+      else
+        fprintf(out, "%07d%05d%05d%03d%05d%07d\n", F7_DIV, rs2, rs1, F3_DIV, rd, OP_LA);
+    }
+    else if (strncmp(opecode, "remu", 4) == 0) {
+      int rd = reg(r0);
+      int rs1 = reg(r1);
+      int rs2 = reg(r2);
+      if (verbose)
+        fprintf(out, "%07d %05d %05d %03d %05d %07d // %s", F7_REMU, rs2, rs1, F3_REMU, rd, OP_LA, line);
+      else
+        fprintf(out, "%07d%05d%05d%03d%05d%07d\n", F7_REMU, rs2, rs1, F3_REMU, rd, OP_LA);
+    }
+    else if (strncmp(opecode, "rem", 3) == 0) {
+      int rd = reg(r0);
+      int rs1 = reg(r1);
+      int rs2 = reg(r2);
+      if (verbose)
+        fprintf(out, "%07d %05d %05d %03d %05d %07d // %s", F7_REM, rs2, rs1, F3_REM, rd, OP_LA, line);
+      else
+        fprintf(out, "%07d%05d%05d%03d%05d%07d\n", F7_REM, rs2, rs1, F3_REM, rd, OP_LA);
+    }
     else if (strncmp(opecode, "sll", 3) == 0) {
       int rd = reg(r0);
       int rs1 = reg(r1);
@@ -406,33 +442,6 @@ int main(int argc, char *argv[]) {
       else
         fprintf(out, "%07d%05d%05d%03d%05d%07d\n", F7_FSGNJ, rs2, rs1, F3_FSGNJ, rd, OP_FLA);
     }
-    else if (strncmp(opecode, "feq", 3) == 0) {
-      int rd = reg(r0);
-      int rs1 = reg(r1);
-      int rs2 = reg(r2);
-      if (verbose)
-        fprintf(out, "%07d %05d %05d %03d %05d %07d // %s", F7_FEQ, rs2, rs1, F3_FEQ, rd, OP_FLA, line);
-      else
-        fprintf(out, "%07d%05d%05d%03d%05d%07d\n", F7_FEQ, rs2, rs1, F3_FEQ, rd, OP_FLA);
-    }
-    else if (strncmp(opecode, "flt", 3) == 0) {
-      int rd = reg(r0);
-      int rs1 = reg(r1);
-      int rs2 = reg(r2);
-      if (verbose)
-        fprintf(out, "%07d %05d %05d %03d %05d %07d // %s", F7_FLT, rs2, rs1, F3_FLT, rd, OP_FLA, line);
-      else
-        fprintf(out, "%07d%05d%05d%03d%05d%07d\n", F7_FLT, rs2, rs1, F3_FLT, rd, OP_FLA);
-    }
-    else if (strncmp(opecode, "fle", 3) == 0) {
-      int rd = reg(r0);
-      int rs1 = reg(r1);
-      int rs2 = reg(r2);
-      if (verbose)
-        fprintf(out, "%07d %05d %05d %03d %05d %07d // %s", F7_FLE, rs2, rs1, F3_FLE, rd, OP_FLA, line);
-      else
-        fprintf(out, "%07d%05d%05d%03d%05d%07d\n", F7_FLE, rs2, rs1, F3_FLE, rd, OP_FLA);
-    }
     else if (strncmp(opecode, "fsqrt", 5) == 0) {
       int rd = reg(r0);
       int rs1 = reg(r1);
@@ -441,6 +450,17 @@ int main(int argc, char *argv[]) {
       else
         fprintf(out, "%07d%05d%05d%03d%05d%07d\n", F7_FSQRT, RS2_FSQRT, rs1, F3_FSQRT, rd, OP_FLA);
     }
+    else if (strncmp(opecode, "ffloor", 6) == 0) {
+      int rd = reg(r0);
+      int rs1 = reg(r1);
+      if (verbose)
+        fprintf(out, "%07d %05d %05d %03d %05d %07d // %s", F7_FFLOOR, RS2_FFLOOR, rs1, F3_FFLOOR, rd, OP_FLA, line);
+      else
+        fprintf(out, "%07d%05d%05d%03d%05d%07d\n", F7_FFLOOR, RS2_FFLOOR, rs1, F3_FFLOOR, rd, OP_FLA);
+    }
+
+
+    // 浮動小数点数・整数間命令
     else if (strncmp(opecode, "itof", 4) == 0) {
       int rd = reg(r0);
       int rs1 = reg(r1);
@@ -472,6 +492,33 @@ int main(int argc, char *argv[]) {
         fprintf(out, "%07d %05d %05d %03d %05d %07d // %s", F7_IMVF, RS2_IMVF, rs1, F3_IMVF, rd, OP_FLA, line);
       else
         fprintf(out, "%07d%05d%05d%03d%05d%07d\n", F7_IMVF, RS2_IMVF, rs1, F3_IMVF, rd, OP_FLA);
+    }
+    else if (strncmp(opecode, "feq", 3) == 0) {
+      int rd = reg(r0);
+      int rs1 = reg(r1);
+      int rs2 = reg(r2);
+      if (verbose)
+        fprintf(out, "%07d %05d %05d %03d %05d %07d // %s", F7_FEQ, rs2, rs1, F3_FEQ, rd, OP_FLA, line);
+      else
+        fprintf(out, "%07d%05d%05d%03d%05d%07d\n", F7_FEQ, rs2, rs1, F3_FEQ, rd, OP_FLA);
+    }
+    else if (strncmp(opecode, "flt", 3) == 0) {
+      int rd = reg(r0);
+      int rs1 = reg(r1);
+      int rs2 = reg(r2);
+      if (verbose)
+        fprintf(out, "%07d %05d %05d %03d %05d %07d // %s", F7_FLT, rs2, rs1, F3_FLT, rd, OP_FLA, line);
+      else
+        fprintf(out, "%07d%05d%05d%03d%05d%07d\n", F7_FLT, rs2, rs1, F3_FLT, rd, OP_FLA);
+    }
+    else if (strncmp(opecode, "fle", 3) == 0) {
+      int rd = reg(r0);
+      int rs1 = reg(r1);
+      int rs2 = reg(r2);
+      if (verbose)
+        fprintf(out, "%07d %05d %05d %03d %05d %07d // %s", F7_FLE, rs2, rs1, F3_FLE, rd, OP_FLA, line);
+      else
+        fprintf(out, "%07d%05d%05d%03d%05d%07d\n", F7_FLE, rs2, rs1, F3_FLE, rd, OP_FLA);
     }
 
 
