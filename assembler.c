@@ -45,9 +45,9 @@ int main(int argc, char *argv[]) {
 
     int pc;
     char opecode[10];
-    char r0[10];
-    char r1[10];
-    char r2[10];
+    char r0[30];
+    char r1[30];
+    char r2[30];
 
     char* inst = eliminate_comma(line);
 
