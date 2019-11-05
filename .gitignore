@@ -3,5 +3,6 @@
 *.s
 *.bin
 
-assembler
+asm
 *.o
+*.d
