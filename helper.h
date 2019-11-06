@@ -110,8 +110,8 @@
 
 #define F3_INW     10
 #define F3_INF     10
-#define F3_OUTW   000
-#define F3_OUTB    10
+#define F3_OUTB   000
+#define F3_OUTW    10
 
 #define RS2_FSQRT  00000
 #define RS2_FFLOOR 00000
