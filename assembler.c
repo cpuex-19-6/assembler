@@ -5,12 +5,14 @@
 #define BUFSIZE 100
 
 int main(int argc, char *argv[]) {
-  FILE *in, *out;
+  FILE *in, *out, *tag;
   int verbose = 0;
   int bincoeMode = 0;
+  int tagfile = 0;
+  int tag_sub = 0;
 
   if (argc < 3) {
-    perror("Usage: ./assembler [source] [target] (-v)\n");
+    perror("Usage: ./assembler [source] [target] (-v) (-t)\n");
     exit(1);
   }
 
@@ -29,6 +31,18 @@ int main(int argc, char *argv[]) {
     bincoeMode = 1;
   }
 
+  if (((argc >= 4) && strncmp(argv[3], "-l", 2) == 0) ||((argc >= 5) && strncmp(argv[4], "-l", 2) == 0)) {
+    tagfile = 1;
+    char tagfile_name[strlen(argv[1]) + 1];
+    strcpy(tagfile_name, argv[1]);
+    strcat(tagfile_name, ".tag");
+    if ((tag = fopen(tagfile_name, "w")) == NULL) {
+      perror("Failed to open file.\n");
+      exit(1);
+    }
+  }
+
+
   if (bincoeMode) {
     fprintf(out, "memory_initialization_radix=2;\n");
     fprintf(out, "memory_initialization_vector=\n");
@@ -40,6 +54,10 @@ int main(int argc, char *argv[]) {
   while (fgets(line, BUFSIZE, in) != NULL) {
     // コメントはスキップ
     if (strncmp(line, "#", 1) == 0) {
+      if(tagfile > 0){
+        fprintf(tag, "%s", space2_(line + 2));
+        tag_sub = 1;
+      }
       continue;
     }
 
@@ -55,6 +73,11 @@ int main(int argc, char *argv[]) {
     if ((res == 0) || (res == EOF)) {
       printf("cannot assemble: %s", line);
       continue;
+    }
+
+    if(tag_sub > 0){
+	    fprintf(tag, "%d\n", pc);
+	    tag_sub = 0;
     }
 
 
@@ -563,6 +586,8 @@ int main(int argc, char *argv[]) {
   if (bincoeMode) {
     fprintf(out, ";");
   }
+
+  if(tagfile > 0)fclose(tag);
 
   fclose(in);
   fclose(out);

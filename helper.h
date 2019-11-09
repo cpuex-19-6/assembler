@@ -128,6 +128,7 @@
 #endif
 
 char* eliminate_comma(char*);
+char* space2_(char*);
 
 int reg(char*);
 long long int imm_11_0(char*);
