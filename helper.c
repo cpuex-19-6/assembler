@@ -15,6 +15,19 @@ char* eliminate_comma(char* line) {
   return line;
 }
 
+//ラベルのスペースをアンダーバーに変換
+char* space2_(char* line) {
+  int n = strlen(line);
+
+  for (int i=0;i<n;++i) {
+    if (line[i] == ' ') {
+      line[i] = '_';
+    }
+  }
+
+  return line;
+}
+
 // レジスタを5bitのバイナリ（の10進数表記）に変換する
 int reg(char* reg) {
   int n = atoi(++reg);
