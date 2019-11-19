@@ -41,38 +41,11 @@ inw, inf, outw, outb
 ## 使い方
 
 ```bash
-./asm [src] [target] (-v)
-# 例えば ./asm fib.s fib.bin
+./asm [src] [target]
+./asm [src] [target] -l # タグファイル用
+./asm [src] [target] -b # bin.coe 用
+./asm [src] [target] -v # デバッグ用
 ```
-
-アセンブリの形式は
-
-```
-# jump to main entry point
-0 	jalr	x0 x1 12
-# fib.5:
-4	addi	x4 x4 7		! 3
-8	jalr	x0 x1 0		! 3
-# main program starts
-12 	addi	x4 x0 30		! 4
-16	addi	x31 x1 0		! 4
-20	sw	x2 x31 4		! 4
-24	addi	x2 x2 8		! 4
-28	jal	x1 -24		! 4
-32	addi	x2 x2 -8		! 4
-36	lw	x31 x2 4		! 4
-40	addi	x1 x31 0		! 4
-# main program ends
-```
-
-例えば上記のような、
-
-- 行頭にプログラムカウンタの数値がある（アセンブラではこれは単に無視する）
-- ~~`rd`, `rs1`, `rs2` が空白区切り~~ **元のアセンブリがカンマ区切りでも大丈夫です！**
-- レジスタには `x` が先頭に付いていて即値には付いていない
-- load 命令や store 命令でも、例えば `sw	x31 4(x2)` ではなく `sw	x2 x31 4` と表記されている
-
-このような形式を一応想定しています。
 
 実行時に引数のオプションで `-v` を付けると
 

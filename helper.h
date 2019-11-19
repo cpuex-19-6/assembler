@@ -128,6 +128,7 @@
 #endif
 
 char* eliminate_comma(char*);
+char* eliminate_pc(char*);
 char* space2_(char*);
 
 int reg(char*);

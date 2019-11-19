@@ -67,17 +67,24 @@ int main(int argc, char *argv[]) {
     char r1[30];
     char r2[30];
 
-    char* inst = eliminate_comma(line);
+    char* inst;
+    int res;
 
-    int res = sscanf(inst, "%d%s%s%s%s", &pc, opecode, r0, r1, r2);
+    if (tag_sub > 0) {
+      inst = eliminate_comma(line);
+      res = sscanf(inst, "%d%s%s%s%s", &pc, opecode, r0, r1, r2);
+
+      fprintf(tag, "%d\n", pc);
+	    tag_sub = 0;
+
+    } else {
+      inst = eliminate_pc(eliminate_comma(line));
+      res = sscanf(inst, "%s%s%s%s", opecode, r0, r1, r2);
+    }
+
     if ((res == 0) || (res == EOF)) {
       printf("cannot assemble: %s", line);
       continue;
-    }
-
-    if(tag_sub > 0){
-	    fprintf(tag, "%d\n", pc);
-	    tag_sub = 0;
     }
 
 

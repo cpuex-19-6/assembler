@@ -15,6 +15,27 @@ char* eliminate_comma(char* line) {
   return line;
 }
 
+// 行頭のPCの数値を除去する
+char* eliminate_pc(char* line) {
+  int n = strlen(line);
+
+  for (int i=0;i<n;++i) {
+    char cur = line[i];
+
+    if (cur == 32) {
+      continue;
+    } else if (cur == 9) {
+      continue;
+    } else if (cur >= 48 && cur <= 57) {
+      line[i] = ' ';
+    } else {
+      break;
+    }
+  }
+
+  return line;
+}
+
 //ラベルのスペースをアンダーバーに変換
 char* space2_(char* line) {
   int n = strlen(line);
