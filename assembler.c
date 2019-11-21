@@ -581,6 +581,13 @@ int main(int argc, char *argv[]) {
       else 
         fprintf(out, "%07d%05d%05d%03d%05d%07d\n", F7_OUTB, RS2_OUT, rs1, F3_OUTB, RD_OUT, OP_OUT);
     }
+    else if (strncmp(opecode, "outf", 4) == 0) {
+      int rs1 = reg(r0);
+      if (verbose)
+        fprintf(out, "%07d %05d %05d %03d %05d %07d // %s", F7_OUTF, RS2_OUT, rs1, F3_OUTF, RD_OUT, OP_OUT, line);
+      else 
+        fprintf(out, "%07d%05d%05d%03d%05d%07d\n", F7_OUTF, RS2_OUT, rs1, F3_OUTF, RD_OUT, OP_OUT);
+    }
 
 
 

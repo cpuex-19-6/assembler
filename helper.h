@@ -55,6 +55,7 @@
 #define F7_INF     100000
 #define F7_OUTW   0000000
 #define F7_OUTB   0000000
+#define F7_OUTF    100000
 
 #define F3_ADD  000
 #define F3_SUB  000
@@ -112,6 +113,7 @@
 #define F3_INF     10
 #define F3_OUTB   000
 #define F3_OUTW    10
+#define F3_OUTF    10
 
 #define RS2_FSQRT  00000
 #define RS2_FFLOOR 00000
