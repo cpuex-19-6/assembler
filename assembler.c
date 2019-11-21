@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 #include "./helper.h"
 #define BUFSIZE 100
 
@@ -12,36 +13,55 @@ int main(int argc, char *argv[]) {
   int tag_sub = 0;
 
   if (argc < 3) {
-    perror("Usage: ./assembler [source] [target] (-v) (-t)\n");
-    exit(1);
+    printf("Usage: ./assembler (options) [source] [target]\n");
+    printf("options:\n");
+    printf("\t-l\t# tagfile mode\n");
+    printf("\t-b\t# bin.coe mode\n");
+    printf("\t-B\t# binary mode (WIP)\n");
+    printf("\t-v\t# debug mode\n");
+    exit(0);
   }
 
-  if ((in = fopen(argv[1], "r")) == NULL) {
+  int opt;
+
+  while ((opt = getopt(argc, argv, "lbBv")) != -1) {
+    switch (opt) {
+      case 'l':
+        tagfile = 1;
+        break;
+        
+      case 'b':
+        bincoeMode = 1;
+        break;
+
+      case 'B':
+        // バイナリ生成モード。これから作る
+        break;
+
+      case 'v':
+        verbose = 1;
+        break;
+    }
+  }
+
+  if ((in = fopen(argv[optind], "r")) == NULL) {
     perror("Failed to open file.\n");
     exit(1);
   }
-  if ((out = fopen(argv[2], "w")) == NULL) {
+  if ((out = fopen(argv[optind+1], "w")) == NULL) {
     perror("Failed to open file.\n");
     exit(1);
   }
-  if ((argc >= 4) && strncmp(argv[3], "-v", 2) == 0) {
-    verbose = 1;
-  }
-  if ((argc >= 4) && strncmp(argv[3], "-b", 2) == 0) {
-    bincoeMode = 1;
-  }
 
-  if (((argc >= 4) && strncmp(argv[3], "-l", 2) == 0) ||((argc >= 5) && strncmp(argv[4], "-l", 2) == 0)) {
-    tagfile = 1;
-    char tagfile_name[strlen(argv[1]) + 1];
-    strcpy(tagfile_name, argv[1]);
+  if (tagfile) {
+    char tagfile_name[strlen(argv[optind]) + 1];
+    strcpy(tagfile_name, argv[optind]);
     strcat(tagfile_name, ".tag");
     if ((tag = fopen(tagfile_name, "w")) == NULL) {
       perror("Failed to open file.\n");
       exit(1);
     }
   }
-
 
   if (bincoeMode) {
     fprintf(out, "memory_initialization_radix=2;\n");
@@ -75,7 +95,7 @@ int main(int argc, char *argv[]) {
       res = sscanf(inst, "%d%s%s%s%s", &pc, opecode, r0, r1, r2);
 
       fprintf(tag, "%d\n", pc);
-	    tag_sub = 0;
+      tag_sub = 0;
 
     } else {
       inst = eliminate_pc(eliminate_comma(line));
