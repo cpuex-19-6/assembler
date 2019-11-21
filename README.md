@@ -36,7 +36,7 @@ itof, ftoi, fmvi, imvf, feq, flt, fle
 
 #### 入出力命令
 
-inw, inf, outw, outb
+inw, inf, outw, outb, outf
 
 ## 使い方
 
