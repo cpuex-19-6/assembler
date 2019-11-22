@@ -1,3 +1,5 @@
+#include <stdio.h>
+
 #ifndef INSTRUCTION_INCLUDE
 #define INSTRUCTION_INCLUDE
 
@@ -132,6 +134,7 @@
 char* eliminate_comma(char*);
 char* eliminate_pc(char*);
 char* space2_(char*);
+void emit_binary(FILE*, char*);
 
 int reg(char*);
 long long int imm_11_0(char*);

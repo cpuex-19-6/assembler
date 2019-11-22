@@ -49,6 +49,29 @@ char* space2_(char* line) {
   return line;
 }
 
+// 0, 1の文字列を4つずつに区切って出力する
+void emit_binary(FILE* out, char* line) {
+  char tmp = 0;
+  // int num = 0;
+
+  for (int i=0;i<32;++i) {
+    if ((i > 0) && (i % 8) == 0) {
+      fprintf(out, "%c", tmp);
+      // printf("%d\n", num);
+      tmp = line[i] - '0';
+      // num = line[i] - '0';
+    } else {
+      tmp *= 2;
+      tmp += line[i] - '0';
+      // num *= 2;
+      // num += line[i] - '0';
+    }
+  }
+
+  fprintf(out, "%c", tmp);
+  // printf("%d\n", num);
+}
+
 // レジスタを5bitのバイナリ（の10進数表記）に変換する
 int reg(char* reg) {
   int n = atoi(++reg);

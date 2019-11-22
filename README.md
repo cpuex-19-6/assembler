@@ -44,7 +44,7 @@ inw, inf, outw, outb, outf
 ./asm [src] [target]
 ./asm  -l [src] [target] # タグファイル用
 ./asm  -b [src] [target] # bin.coe 用
-./asm  -B [src] [target] # バイナリ 用（予定）
+./asm  -B [src] [target] # バイナリ用
 ./asm  -v [src] [target] # デバッグ用
 ```
 
@@ -54,5 +54,5 @@ inw, inf, outw, outb, outf
 |:---|:---|
 |  -l  |  タグファイルも合わせて生成する。  |
 |  -b  |  bin.coe 形式で機械語を出力する。  |
-|  -B  |  バイナリを出力する。（予定）  |
+|  -B  |  バイナリを出力する。 |
 |  -v  |  デバッグモード  |
