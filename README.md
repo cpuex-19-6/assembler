@@ -42,10 +42,10 @@ inw, inf, outw, outb, outf
 
 ```bash
 ./asm [src] [target]
-./asm  -l [src] [target] # タグファイル用
-./asm  -b [src] [target] # bin.coe 用
-./asm  -B [src] [target] # バイナリ用
-./asm  -v [src] [target] # デバッグ用
+./asm -l [src] [target] # タグファイル用
+./asm -b [src] [target] # bin.coe 用
+./asm -B [src] [target] # バイナリ用
+./asm -v [src] [target] # デバッグ用
 ```
 
 ## オプション

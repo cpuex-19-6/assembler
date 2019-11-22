@@ -18,7 +18,7 @@ int main(int argc, char *argv[]) {
     printf("options:\n");
     printf("\t-l\t# tagfile mode\n");
     printf("\t-b\t# bin.coe mode\n");
-    printf("\t-B\t# binary mode (WIP)\n");
+    printf("\t-B\t# binary mode\n");
     printf("\t-v\t# debug mode\n");
     exit(0);
   }
