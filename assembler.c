@@ -3,6 +3,7 @@
 #include <string.h>
 #include <unistd.h>
 #include "./helper.h"
+#include "./psuedo_library.h"
 #define BUFSIZE 100
 
 int main(int argc, char *argv[]) {
@@ -882,6 +883,60 @@ int main(int argc, char *argv[]) {
       }
     }
 
+
+    // 擬似命令
+    else if (strncmp(opecode, "li", 2) == 0) {
+      int rd = reg(r0);
+      long long int num = atoi(r1);
+
+      long long int u = upper(num);
+      long long int l = lower(num);
+
+      //printf("%lld %lld\n", u, l);
+
+      int rs1;
+      long long int imm;
+
+      if (u == 0) {
+        rs1 = 0;
+        imm = imm_11_0_int(l);
+        if (verbose)
+          fprintf(out, "%012lld %05d %03d %05d %07d // %s", imm, rs1, F3_ADDI, rd, OP_LAI, line);
+        else {
+          sprintf(str, "%012lld%05d%03d%05d%07d", imm, rs1, F3_ADDI, rd, OP_LAI);
+          if (binaryMode)
+            emit_binary(out, str);
+          else 
+            fprintf(out, "%s\n", str);
+        }
+      } else {
+        imm = imm_31_12_int(u);
+        if (verbose)
+          fprintf(out, "%020llu %05d %07d // %s", imm, rd, OP_LUI, line);
+        else {
+          sprintf(str, "%020llu%05d%07d", imm, rd, OP_LUI);
+          if (binaryMode)
+            emit_binary(out, str);
+          else 
+            fprintf(out, "%s\n", str);
+        }
+
+        if (l != 0) {
+          rs1 = rd;
+          imm = imm_11_0_int(l);
+
+          if (verbose)
+            fprintf(out, "%012lld %05d %03d %05d %07d // %s", imm, rs1, F3_ADDI, rd, OP_LAI, line);
+          else {
+            sprintf(str, "%012lld%05d%03d%05d%07d", imm, rs1, F3_ADDI, rd, OP_LAI);
+            if (binaryMode)
+              emit_binary(out, str);
+            else 
+              fprintf(out, "%s\n", str);
+          }
+        }
+      }
+    }
 
 
     else {
