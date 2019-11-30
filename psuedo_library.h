@@ -5,3 +5,5 @@ long long int lower(long long int n);
 
 unsigned long long int imm_31_12_int(long long int imm);
 long long int imm_11_0_int(int imm);
+
+typedef union { float f; int i; } uni;
