@@ -16,6 +16,7 @@
 #define OP_FLW       111
 #define OP_FSW    100111
 #define OP_FLA   1010011
+#define OP_FCB   1111011
 
 #define OP_IN       1011
 #define OP_OUT    101011
@@ -93,6 +94,11 @@
 #define F3_BGE  101
 #define F3_BLTU 110
 #define F3_BGEU 111
+
+#define F3_FBEQ  000
+#define F3_FBNE    1
+#define F3_FBLT  100
+#define F3_FBGE  101
 
 #define F3_FADD   000
 #define F3_FSUB   000

@@ -563,6 +563,68 @@ int main(int argc, char *argv[]) {
           fprintf(out, "%s\n", str); 
       }
     }
+
+    //浮動小数点条件分岐命令
+    else if (strncmp(opecode, "fbeq", 4) == 0) {
+      int rs1 = reg(r0);
+      int rs2 = reg(r1);
+      long long int imm1 = imm_12_10_5(r2);
+      int imm2 = imm_4_1_11(r2);
+      if (verbose)
+        fprintf(out, "%07lld %05d %05d %03d %05d %07d // %s", imm1, rs2, rs1, F3_FBEQ, imm2, OP_FCB, line);
+      else {
+        sprintf(str, "%07lld%05d%05d%03d%05d%07d", imm1, rs2, rs1, F3_FBEQ, imm2, OP_FCB);
+        if (binaryMode)
+          emit_binary(out, str);
+        else 
+          fprintf(out, "%s\n", str); 
+      }
+    }
+    else if (strncmp(opecode, "fbne", 4) == 0) {
+      int rs1 = reg(r0);
+      int rs2 = reg(r1);
+      long long int imm1 = imm_12_10_5(r2);
+      int imm2 = imm_4_1_11(r2);
+      if (verbose)
+        fprintf(out, "%07lld %05d %05d %03d %05d %07d // %s", imm1, rs2, rs1, F3_FBNE, imm2, OP_FCB, line);
+      else {
+        sprintf(str, "%07lld%05d%05d%03d%05d%07d", imm1, rs2, rs1, F3_FBNE, imm2, OP_FCB);
+        if (binaryMode)
+          emit_binary(out, str);
+        else 
+          fprintf(out, "%s\n", str); 
+      }
+    }
+    else if (strncmp(opecode, "fblt", 4) == 0) {
+      int rs1 = reg(r0);
+      int rs2 = reg(r1);
+      long long int imm1 = imm_12_10_5(r2);
+      int imm2 = imm_4_1_11(r2);
+      if (verbose)
+        fprintf(out, "%07lld %05d %05d %03d %05d %07d // %s", imm1, rs2, rs1, F3_FBLT, imm2, OP_FCB, line);
+      else {
+        sprintf(str, "%07lld%05d%05d%03d%05d%07d", imm1, rs2, rs1, F3_FBLT, imm2, OP_FCB);
+        if (binaryMode)
+          emit_binary(out, str);
+        else 
+          fprintf(out, "%s\n", str); 
+      }
+    }
+    else if (strncmp(opecode, "fbge", 4) == 0) {
+      int rs1 = reg(r0);
+      int rs2 = reg(r1);
+      long long int imm1 = imm_12_10_5(r2);
+      int imm2 = imm_4_1_11(r2);
+      if (verbose)
+        fprintf(out, "%07lld %05d %05d %03d %05d %07d // %s", imm1, rs2, rs1, F3_FBGE, imm2, OP_FCB, line);
+      else {
+        sprintf(str, "%07lld%05d%05d%03d%05d%07d", imm1, rs2, rs1, F3_FBGE, imm2, OP_FCB);
+        if (binaryMode)
+          emit_binary(out, str);
+        else 
+          fprintf(out, "%s\n", str); 
+      }
+    }
     
 
     // 浮動小数点数メモリ操作命令
