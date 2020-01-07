@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <getopt.h>
 #include "./helper.h"
 #include "./psuedo_library.h"
 #define BUFSIZE 100
@@ -11,6 +12,7 @@ int main(int argc, char *argv[]) {
   int verbose = 0;
   int bincoeMode = 0;
   int binaryMode = 0;
+  int instNum = 0;
   int tagfile = 0;
   int tag_sub = 0;
 
@@ -19,6 +21,7 @@ int main(int argc, char *argv[]) {
     printf("options:\n");
     printf("\t-l\t# tagfile mode\n");
     printf("\t-b\t# bin.coe mode\n");
+    printf("\t-bn 3\t# bin.coe mode (multiple instructions)\n");
     printf("\t-B\t# binary mode\n");
     printf("\t-v\t# debug mode\n");
     exit(0);
@@ -26,7 +29,7 @@ int main(int argc, char *argv[]) {
 
   int opt;
 
-  while ((opt = getopt(argc, argv, "lbBv")) != -1) {
+  while ((opt = getopt(argc, argv, "lbnBv")) != -1) {
     switch (opt) {
       case 'l':
         tagfile = 1;
@@ -34,6 +37,11 @@ int main(int argc, char *argv[]) {
         
       case 'b':
         bincoeMode = 1;
+        break;
+
+      case 'n': 
+        instNum = atoi(argv[optind]);
+        ++optind;
         break;
 
       case 'B':
@@ -72,6 +80,8 @@ int main(int argc, char *argv[]) {
 
 
   char line[BUFSIZE];
+
+  int ct = 1;
 
   while (fgets(line, BUFSIZE, in) != NULL) {
     // コメントはスキップ
@@ -123,7 +133,11 @@ int main(int argc, char *argv[]) {
         if (binaryMode)
           emit_binary(out, str);
         else 
-          fprintf(out, "%s\n", str);
+          if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
+            fprintf(out, "%s\n", str);
+          }
       }
     }
 
@@ -140,7 +154,11 @@ int main(int argc, char *argv[]) {
         if (binaryMode)
           emit_binary(out, str);
         else 
-          fprintf(out, "%s\n", str);
+          if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
+            fprintf(out, "%s\n", str);
+          }
       }
     }
     else if (strncmp(opecode, "slli", 4) == 0) {
@@ -154,7 +172,11 @@ int main(int argc, char *argv[]) {
         if (binaryMode)
           emit_binary(out, str);
         else 
-          fprintf(out, "%s\n", str);
+          if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
+            fprintf(out, "%s\n", str);
+          }
       }
     }
     else if (strncmp(opecode, "xori", 4) == 0) {
@@ -168,7 +190,11 @@ int main(int argc, char *argv[]) {
         if (binaryMode)
           emit_binary(out, str);
         else 
-          fprintf(out, "%s\n", str);
+          if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
+            fprintf(out, "%s\n", str);
+          }
       }
     }
     else if (strncmp(opecode, "srli", 4) == 0) {
@@ -182,7 +208,11 @@ int main(int argc, char *argv[]) {
         if (binaryMode)
           emit_binary(out, str);
         else 
-          fprintf(out, "%s\n", str);
+          if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
+            fprintf(out, "%s\n", str);
+          }
       }
     }
     else if (strncmp(opecode, "srai", 4) == 0) {
@@ -196,7 +226,11 @@ int main(int argc, char *argv[]) {
         if (binaryMode)
           emit_binary(out, str);
         else 
-          fprintf(out, "%s\n", str);
+          if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
+            fprintf(out, "%s\n", str);
+          }
       }
     }
     else if (strncmp(opecode, "ori", 3) == 0) {
@@ -210,7 +244,11 @@ int main(int argc, char *argv[]) {
         if (binaryMode)
           emit_binary(out, str);
         else 
-          fprintf(out, "%s\n", str);
+          if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
+            fprintf(out, "%s\n", str);
+          }
       }
     }
     else if (strncmp(opecode, "andi", 4) == 0) {
@@ -224,7 +262,11 @@ int main(int argc, char *argv[]) {
         if (binaryMode)
           emit_binary(out, str);
         else 
-          fprintf(out, "%s\n", str);
+          if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
+            fprintf(out, "%s\n", str);
+          }
       }
     }
     else if (strncmp(opecode, "add", 3) == 0) {
@@ -238,7 +280,11 @@ int main(int argc, char *argv[]) {
         if (binaryMode)
           emit_binary(out, str);
         else 
-          fprintf(out, "%s\n", str);
+          if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
+            fprintf(out, "%s\n", str);
+          }
       }
     }
     else if (strncmp(opecode, "sub", 3) == 0) {
@@ -252,7 +298,11 @@ int main(int argc, char *argv[]) {
         if (binaryMode)
           emit_binary(out, str);
         else 
-          fprintf(out, "%s\n", str);
+          if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
+            fprintf(out, "%s\n", str);
+          }
       }
     }
     else if (strncmp(opecode, "divu", 4) == 0) {
@@ -266,7 +316,11 @@ int main(int argc, char *argv[]) {
         if (binaryMode)
           emit_binary(out, str);
         else 
-          fprintf(out, "%s\n", str);
+          if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
+            fprintf(out, "%s\n", str);
+          }
       }
     }
     else if (strncmp(opecode, "div", 3) == 0) {
@@ -280,7 +334,11 @@ int main(int argc, char *argv[]) {
         if (binaryMode)
           emit_binary(out, str);
         else 
-          fprintf(out, "%s\n", str);
+          if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
+            fprintf(out, "%s\n", str);
+          }
       }
     }
     else if (strncmp(opecode, "remu", 4) == 0) {
@@ -294,7 +352,11 @@ int main(int argc, char *argv[]) {
         if (binaryMode)
           emit_binary(out, str);
         else 
-          fprintf(out, "%s\n", str);
+          if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
+            fprintf(out, "%s\n", str);
+          }
       }
     }
     else if (strncmp(opecode, "rem", 3) == 0) {
@@ -308,7 +370,11 @@ int main(int argc, char *argv[]) {
         if (binaryMode)
           emit_binary(out, str);
         else 
-          fprintf(out, "%s\n", str);
+          if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
+            fprintf(out, "%s\n", str);
+          }
       }
     }
     else if (strncmp(opecode, "sll", 3) == 0) {
@@ -322,7 +388,11 @@ int main(int argc, char *argv[]) {
         if (binaryMode)
           emit_binary(out, str);
         else 
-          fprintf(out, "%s\n", str);
+          if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
+            fprintf(out, "%s\n", str);
+          }
       }
     }
     else if (strncmp(opecode, "xor", 3) == 0) {
@@ -336,7 +406,11 @@ int main(int argc, char *argv[]) {
         if (binaryMode)
           emit_binary(out, str);
         else 
-          fprintf(out, "%s\n", str);
+          if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
+            fprintf(out, "%s\n", str);
+          }
       }
     }
     else if (strncmp(opecode, "srl", 3) == 0) {
@@ -350,7 +424,11 @@ int main(int argc, char *argv[]) {
         if (binaryMode)
           emit_binary(out, str);
         else 
-          fprintf(out, "%s\n", str);
+          if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
+            fprintf(out, "%s\n", str);
+          }
       }
     }
     else if (strncmp(opecode, "sra", 3) == 0) {
@@ -364,7 +442,11 @@ int main(int argc, char *argv[]) {
         if (binaryMode)
           emit_binary(out, str);
         else 
-          fprintf(out, "%s\n", str);
+          if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
+            fprintf(out, "%s\n", str);
+          }
       }
     }
     else if (strncmp(opecode, "or", 2) == 0) {
@@ -378,7 +460,11 @@ int main(int argc, char *argv[]) {
         if (binaryMode)
           emit_binary(out, str);
         else 
-          fprintf(out, "%s\n", str);
+          if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
+            fprintf(out, "%s\n", str);
+          }
       }
     }
     else if (strncmp(opecode, "and", 3) == 0) {
@@ -392,7 +478,11 @@ int main(int argc, char *argv[]) {
         if (binaryMode)
           emit_binary(out, str);
         else 
-          fprintf(out, "%s\n", str);
+          if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
+            fprintf(out, "%s\n", str);
+          }
       }
     }
 
@@ -409,7 +499,11 @@ int main(int argc, char *argv[]) {
         if (binaryMode)
           emit_binary(out, str);
         else 
-          fprintf(out, "%s\n", str);
+          if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
+            fprintf(out, "%s\n", str);
+          }
       }
     }
     else if (strncmp(opecode, "sw", 2) == 0) {
@@ -424,7 +518,11 @@ int main(int argc, char *argv[]) {
         if (binaryMode)
           emit_binary(out, str);
         else 
-          fprintf(out, "%s\n", str);
+          if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
+            fprintf(out, "%s\n", str);
+          }
       }
     }
 
@@ -440,7 +538,11 @@ int main(int argc, char *argv[]) {
         if (binaryMode)
           emit_binary(out, str);
         else 
-          fprintf(out, "%s\n", str);
+          if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
+            fprintf(out, "%s\n", str);
+          }
       }
     }
     else if (strncmp(opecode, "jalr", 4) == 0) {
@@ -454,7 +556,11 @@ int main(int argc, char *argv[]) {
         if (binaryMode)
           emit_binary(out, str);
         else 
-          fprintf(out, "%s\n", str);
+          if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
+            fprintf(out, "%s\n", str);
+          }
       }
     }
     else if (strncmp(opecode, "jal", 3) == 0) {
@@ -467,7 +573,11 @@ int main(int argc, char *argv[]) {
         if (binaryMode)
           emit_binary(out, str);
         else 
-          fprintf(out, "%s\n", str); 
+          if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
+            fprintf(out, "%s\n", str);
+          } 
       }
     }
 
@@ -485,7 +595,11 @@ int main(int argc, char *argv[]) {
         if (binaryMode)
           emit_binary(out, str);
         else 
-          fprintf(out, "%s\n", str); 
+          if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
+            fprintf(out, "%s\n", str);
+          } 
       }
     }
     else if (strncmp(opecode, "bgeu", 4) == 0) {
@@ -500,7 +614,11 @@ int main(int argc, char *argv[]) {
         if (binaryMode)
           emit_binary(out, str);
         else 
-          fprintf(out, "%s\n", str); 
+          if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
+            fprintf(out, "%s\n", str);
+          } 
       }
     }
     else if (strncmp(opecode, "beq", 3) == 0) {
@@ -515,7 +633,11 @@ int main(int argc, char *argv[]) {
         if (binaryMode)
           emit_binary(out, str);
         else 
-          fprintf(out, "%s\n", str); 
+          if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
+            fprintf(out, "%s\n", str);
+          } 
       }
     }
     else if (strncmp(opecode, "bne", 3) == 0) {
@@ -530,7 +652,11 @@ int main(int argc, char *argv[]) {
         if (binaryMode)
           emit_binary(out, str);
         else 
-          fprintf(out, "%s\n", str); 
+          if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
+            fprintf(out, "%s\n", str);
+          } 
       }
     }
     else if (strncmp(opecode, "blt", 3) == 0) {
@@ -545,7 +671,11 @@ int main(int argc, char *argv[]) {
         if (binaryMode)
           emit_binary(out, str);
         else 
-          fprintf(out, "%s\n", str); 
+          if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
+            fprintf(out, "%s\n", str);
+          } 
       }
     }
     else if (strncmp(opecode, "bge", 3) == 0) {
@@ -560,7 +690,11 @@ int main(int argc, char *argv[]) {
         if (binaryMode)
           emit_binary(out, str);
         else 
-          fprintf(out, "%s\n", str); 
+          if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
+            fprintf(out, "%s\n", str);
+          } 
       }
     }
 
@@ -577,7 +711,11 @@ int main(int argc, char *argv[]) {
         if (binaryMode)
           emit_binary(out, str);
         else 
-          fprintf(out, "%s\n", str); 
+          if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
+            fprintf(out, "%s\n", str);
+          } 
       }
     }
     else if (strncmp(opecode, "fbne", 4) == 0) {
@@ -592,7 +730,11 @@ int main(int argc, char *argv[]) {
         if (binaryMode)
           emit_binary(out, str);
         else 
-          fprintf(out, "%s\n", str); 
+          if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
+            fprintf(out, "%s\n", str);
+          } 
       }
     }
     else if (strncmp(opecode, "fblt", 4) == 0) {
@@ -607,7 +749,11 @@ int main(int argc, char *argv[]) {
         if (binaryMode)
           emit_binary(out, str);
         else 
-          fprintf(out, "%s\n", str); 
+          if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
+            fprintf(out, "%s\n", str);
+          } 
       }
     }
     else if (strncmp(opecode, "fbge", 4) == 0) {
@@ -622,7 +768,11 @@ int main(int argc, char *argv[]) {
         if (binaryMode)
           emit_binary(out, str);
         else 
-          fprintf(out, "%s\n", str); 
+          if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
+            fprintf(out, "%s\n", str);
+          } 
       }
     }
     
@@ -639,7 +789,11 @@ int main(int argc, char *argv[]) {
         if (binaryMode)
           emit_binary(out, str);
         else 
-          fprintf(out, "%s\n", str); 
+          if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
+            fprintf(out, "%s\n", str);
+          } 
       }
     }
     else if (strncmp(opecode, "fsw", 3) == 0) {
@@ -654,7 +808,11 @@ int main(int argc, char *argv[]) {
         if (binaryMode)
           emit_binary(out, str);
         else 
-          fprintf(out, "%s\n", str); 
+          if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
+            fprintf(out, "%s\n", str);
+          } 
       }
     }
 
@@ -671,7 +829,11 @@ int main(int argc, char *argv[]) {
         if (binaryMode)
           emit_binary(out, str);
         else 
-          fprintf(out, "%s\n", str); 
+          if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
+            fprintf(out, "%s\n", str);
+          } 
       }
     }
     else if (strncmp(opecode, "fsub", 4) == 0) {
@@ -685,7 +847,11 @@ int main(int argc, char *argv[]) {
         if (binaryMode)
           emit_binary(out, str);
         else 
-          fprintf(out, "%s\n", str); 
+          if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
+            fprintf(out, "%s\n", str);
+          } 
       }
     }
     else if (strncmp(opecode, "fmul", 4) == 0) {
@@ -699,7 +865,11 @@ int main(int argc, char *argv[]) {
         if (binaryMode)
           emit_binary(out, str);
         else 
-          fprintf(out, "%s\n", str);
+          if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
+            fprintf(out, "%s\n", str);
+          }
       }
     }
     else if (strncmp(opecode, "fdiv", 4) == 0) {
@@ -713,7 +883,11 @@ int main(int argc, char *argv[]) {
         if (binaryMode)
           emit_binary(out, str);
         else 
-          fprintf(out, "%s\n", str);
+          if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
+            fprintf(out, "%s\n", str);
+          }
       }
     }
     else if (strncmp(opecode, "fsgnjn", 6) == 0) {
@@ -727,7 +901,11 @@ int main(int argc, char *argv[]) {
         if (binaryMode)
           emit_binary(out, str);
         else 
-          fprintf(out, "%s\n", str);
+          if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
+            fprintf(out, "%s\n", str);
+          }
       }
     }
     else if (strncmp(opecode, "fsgnjx", 6) == 0) {
@@ -741,7 +919,11 @@ int main(int argc, char *argv[]) {
         if (binaryMode)
           emit_binary(out, str);
         else 
-          fprintf(out, "%s\n", str);
+          if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
+            fprintf(out, "%s\n", str);
+          }
       }
     }
     else if (strncmp(opecode, "fsgnj", 5) == 0) {
@@ -755,7 +937,11 @@ int main(int argc, char *argv[]) {
         if (binaryMode)
           emit_binary(out, str);
         else 
-          fprintf(out, "%s\n", str);
+          if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
+            fprintf(out, "%s\n", str);
+          }
       }
     }
     else if (strncmp(opecode, "fsqrt", 5) == 0) {
@@ -768,7 +954,11 @@ int main(int argc, char *argv[]) {
         if (binaryMode)
           emit_binary(out, str);
         else 
-          fprintf(out, "%s\n", str);
+          if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
+            fprintf(out, "%s\n", str);
+          }
       }
     }
     else if (strncmp(opecode, "ffloor", 6) == 0) {
@@ -781,7 +971,11 @@ int main(int argc, char *argv[]) {
         if (binaryMode)
           emit_binary(out, str);
         else 
-          fprintf(out, "%s\n", str);
+          if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
+            fprintf(out, "%s\n", str);
+          }
       }
     }
 
@@ -797,7 +991,11 @@ int main(int argc, char *argv[]) {
         if (binaryMode)
           emit_binary(out, str);
         else 
-          fprintf(out, "%s\n", str);
+          if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
+            fprintf(out, "%s\n", str);
+          }
       }
     }
     else if (strncmp(opecode, "ftoi", 4) == 0) {
@@ -810,7 +1008,11 @@ int main(int argc, char *argv[]) {
         if (binaryMode)
           emit_binary(out, str);
         else 
-          fprintf(out, "%s\n", str);
+          if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
+            fprintf(out, "%s\n", str);
+          }
       }
     }
     else if (strncmp(opecode, "fmvi", 4) == 0) {
@@ -823,7 +1025,11 @@ int main(int argc, char *argv[]) {
         if (binaryMode)
           emit_binary(out, str);
         else 
-          fprintf(out, "%s\n", str);
+          if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
+            fprintf(out, "%s\n", str);
+          }
       }
     }
     else if (strncmp(opecode, "imvf", 4) == 0) {
@@ -836,7 +1042,11 @@ int main(int argc, char *argv[]) {
         if (binaryMode)
           emit_binary(out, str);
         else 
-          fprintf(out, "%s\n", str);
+          if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
+            fprintf(out, "%s\n", str);
+          }
       }
     }
     else if (strncmp(opecode, "feq", 3) == 0) {
@@ -850,7 +1060,11 @@ int main(int argc, char *argv[]) {
         if (binaryMode)
           emit_binary(out, str);
         else 
-          fprintf(out, "%s\n", str);
+          if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
+            fprintf(out, "%s\n", str);
+          }
       }
     }
     else if (strncmp(opecode, "flt", 3) == 0) {
@@ -864,7 +1078,11 @@ int main(int argc, char *argv[]) {
         if (binaryMode)
           emit_binary(out, str);
         else 
-          fprintf(out, "%s\n", str);
+          if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
+            fprintf(out, "%s\n", str);
+          }
       }
     }
     else if (strncmp(opecode, "fle", 3) == 0) {
@@ -878,7 +1096,11 @@ int main(int argc, char *argv[]) {
         if (binaryMode)
           emit_binary(out, str);
         else 
-          fprintf(out, "%s\n", str);
+          if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
+            fprintf(out, "%s\n", str);
+          }
       }
     }
 
@@ -893,7 +1115,11 @@ int main(int argc, char *argv[]) {
         if (binaryMode)
           emit_binary(out, str);
         else 
-          fprintf(out, "%s\n", str);
+          if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
+            fprintf(out, "%s\n", str);
+          }
       }
     }
     else if (strncmp(opecode, "inf", 3) == 0) {
@@ -905,7 +1131,11 @@ int main(int argc, char *argv[]) {
         if (binaryMode)
           emit_binary(out, str);
         else 
-          fprintf(out, "%s\n", str);
+          if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
+            fprintf(out, "%s\n", str);
+          }
       }
     }
     else if (strncmp(opecode, "outw", 4) == 0) {
@@ -917,7 +1147,11 @@ int main(int argc, char *argv[]) {
         if (binaryMode)
           emit_binary(out, str);
         else 
-          fprintf(out, "%s\n", str);
+          if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
+            fprintf(out, "%s\n", str);
+          }
       }
     }
     else if (strncmp(opecode, "outb", 4) == 0) {
@@ -929,7 +1163,11 @@ int main(int argc, char *argv[]) {
         if (binaryMode)
           emit_binary(out, str);
         else 
-          fprintf(out, "%s\n", str);
+          if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
+            fprintf(out, "%s\n", str);
+          }
       }
     }
     else if (strncmp(opecode, "outf", 4) == 0) {
@@ -941,7 +1179,11 @@ int main(int argc, char *argv[]) {
         if (binaryMode)
           emit_binary(out, str);
         else 
-          fprintf(out, "%s\n", str);
+          if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
+            fprintf(out, "%s\n", str);
+          }
       }
     }
 
@@ -969,7 +1211,11 @@ int main(int argc, char *argv[]) {
           if (binaryMode)
             emit_binary(out, str);
           else 
+            if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
             fprintf(out, "%s\n", str);
+          }
         }
       } else {
         imm = imm_31_12_int(u);
@@ -980,10 +1226,15 @@ int main(int argc, char *argv[]) {
           if (binaryMode)
             emit_binary(out, str);
           else 
+            if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
             fprintf(out, "%s\n", str);
+          }
         }
 
         if (l != 0) {
+          ct++;
           rs1 = rd;
           imm = imm_11_0_int(l);
 
@@ -994,7 +1245,11 @@ int main(int argc, char *argv[]) {
             if (binaryMode)
               emit_binary(out, str);
             else 
-              fprintf(out, "%s\n", str);
+              if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
+            fprintf(out, "%s\n", str);
+          }
           }
         }
       }
@@ -1029,10 +1284,15 @@ int main(int argc, char *argv[]) {
             if (binaryMode)
               emit_binary(out, str);
             else 
-              fprintf(out, "%s\n", str);
+              if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
+            fprintf(out, "%s\n", str);
+          }
           }
 
           rs1 = 11111;
+          ct++;
           if (verbose)
             fprintf(out, "%07d %05d %05d %03d %05d %07d // %s", F7_IMVF, RS2_IMVF, rs1, F3_IMVF, rd, OP_FLA, line);
           else {
@@ -1040,7 +1300,11 @@ int main(int argc, char *argv[]) {
             if (binaryMode)
               emit_binary(out, str);
             else 
-              fprintf(out, "%s\n", str);
+              if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
+            fprintf(out, "%s\n", str);
+          }
           }
         } else {
           rs1 = 0;
@@ -1051,7 +1315,11 @@ int main(int argc, char *argv[]) {
             if (binaryMode)
               emit_binary(out, str);
             else 
-              fprintf(out, "%s\n", str);
+              if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
+            fprintf(out, "%s\n", str);
+          }
           }
         }
 
@@ -1065,10 +1333,15 @@ int main(int argc, char *argv[]) {
           if (binaryMode)
             emit_binary(out, str);
           else 
+            if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
             fprintf(out, "%s\n", str);
+          }
         }
 
         if (l != 0) {
+          ct++;
           rs1 = 11111;
           imm = imm_11_0_int(l);
           if (verbose)
@@ -1078,10 +1351,15 @@ int main(int argc, char *argv[]) {
             if (binaryMode)
               emit_binary(out, str);
             else 
-              fprintf(out, "%s\n", str);
+              if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
+            fprintf(out, "%s\n", str);
+          }
           }
         }
 
+        ct++;
         rs1 = 11111;
         if (verbose)
           fprintf(out, "%07d %05d %05d %03d %05d %07d // %s", F7_IMVF, RS2_IMVF, rs1, F3_IMVF, rd, OP_FLA, line);
@@ -1090,7 +1368,11 @@ int main(int argc, char *argv[]) {
           if (binaryMode)
             emit_binary(out, str);
           else 
+            if (instNum > 0 && (ct % instNum != 0)) {
+            fprintf(out, "%s", str);
+          } else {
             fprintf(out, "%s\n", str);
+          }
         }
       }
     }
@@ -1099,13 +1381,20 @@ int main(int argc, char *argv[]) {
     else {
       printf("cannot assemble: %s", line);
     }
+
+
+    ++ct;
   }
 
   if (binaryMode)
     emit_binary(out, "00000000000000000000000000000000");
   else
-    fprintf(out, "00000000000000000000000000000000");
-
+    if (instNum > 0) {
+      for (int k=((ct-1) % instNum);k<instNum;++k) 
+        fprintf(out, "00000000000000000000000000000000");
+    } else {
+      fprintf(out, "00000000000000000000000000000000");
+    }
   if (bincoeMode) {
     fprintf(out, ";");
   }

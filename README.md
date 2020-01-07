@@ -25,6 +25,10 @@ auipc, jalr, jal
 
 bltu, bgeu, beq, bne, blt, bge
 
+#### 浮動小数点数条件分岐命令
+
+fbeq, fbne, fblt, fbge
+
 #### メモリ操作命令
 
 lw, sw
@@ -51,6 +55,7 @@ inw, inf, outw, outb, outf
 ./asm [src] [target]
 ./asm -l [src] [target] # タグファイル用
 ./asm -b [src] [target] # bin.coe 用
+./asm -bn [number] [src] [target] # bin.coe 用（1行に複数命令）
 ./asm -B [src] [target] # バイナリ用
 ./asm -v [src] [target] # デバッグ用
 ```
@@ -60,6 +65,6 @@ inw, inf, outw, outb, outf
 | Option   |  Description  |
 |:---|:---|
 |  -l  |  タグファイルも合わせて生成する。  |
-|  -b  |  bin.coe 形式で機械語を出力する。  |
+|  -b, -bn  |  bin.coe 形式で機械語を出力する（-bn は複数命令用）。  |
 |  -B  |  バイナリを出力する。 |
 |  -v  |  デバッグモード  |
